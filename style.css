@@ -223,3 +223,23 @@ footer {
   font-size: 0.9rem;
   z-index: 999;
 }
+
+hr.solid {
+  border-top: 3px solid var(--accent-color);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Text {
+  font-family: inherit;
+  font-size: 2rem;
+  color: var(--accent-color);
+  line-height: 1.5;
+  font-weight: bolder;
+}
+
+.Text p {
+  font-size: 1rem;
+  color: var(--accent-color);
+  line-height: 1.5;
+}
