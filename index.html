@@ -7,50 +7,210 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <h1>SilentiaSwordia Projects</h1>
-      <p class="subtitle">A consolidated monorepo of my works</p>
-    </header>
+    <!-- Auth Panel - Initially visible -->
+    <div id="authPanel">
+      <div class="auth-modal">
+        <h2>Login to Portfolio</h2>
+        <div id="authMessage" class="auth-message" style="display: none"></div>
+        <form id="authForm" class="auth-form">
+          <input
+            type="email"
+            id="authEmail"
+            placeholder="Email"
+            required
+            autocomplete="email"
+          />
+          <input
+            type="password"
+            id="authPassword"
+            placeholder="Password"
+            required
+            autocomplete="current-password"
+          />
+          <button type="submit" id="authSubmit">Login</button>
+        </form>
+      </div>
+    </div>
 
-    <main class="grid-container">
-      <!-- Card 1 -->
-      <a href="./projects/Supabase1.github.io/index.html" class="card">
-        <div>
-          <h2>Supabase1</h2>
-          <p>Project repository for Supabase1.github.io</p>
-        </div>
-        <div class="arrow">&rarr;</div>
-      </a>
+    <!-- User info and logout button (hidden by default) -->
+    <div class="user-info" id="userInfo" style="display: none">
+      <span id="userEmail"></span>
+    </div>
+    <button class="logout-btn" id="logoutBtn" style="display: none">
+      Logout
+    </button>
 
-      <!-- Card 2 -->
-      <a href="./projects/Joachim-2IM-vurdering/index.html" class="card">
-        <div>
-          <h2>Joachim-2IM-vurdering</h2>
-          <p>Assessment project for 2IM.</p>
-        </div>
-        <div class="arrow">&rarr;</div>
-      </a>
+    <!-- Main Content - Initially hidden -->
+    <div id="mainContent">
+      <header>
+        <h1>SilentiaSwordia Projects</h1>
+        <p class="subtitle">A consolidated monorepo of my works</p>
+      </header>
 
-      <!-- Card 3 -->
-      <a href="./projects/fuzzdoodle.github.io/index.html" class="card">
-        <div>
-          <h2>Fuzzdoodle</h2>
-          <p>Project repository for fuzzdoodle.github.io</p>
-          <p>Was supposed to recreate Steam</p>
-        </div>
-        <div class="arrow">&rarr;</div>
-      </a>
+      <main class="grid-container">
+        <!-- Card 1 -->
+        <a href="./projects/Supabase1.github.io/index.html" class="card">
+          <div>
+            <h2>Supabase1</h2>
+            <p>Project repository for Supabase1.github.io</p>
+          </div>
+          <div class="arrow">&rarr;</div>
+        </a>
 
-      <!-- Card 4 -->
-      <a href="./projects/SilentiaSwordia.github.io/index.html" class="card">
-        <div>
-          <h2>SilentiaSwordia</h2>
-          <p>First repo made, what I knew at the start</p>
-        </div>
-        <div class="arrow">&rarr;</div>
-      </a>
-    </main>
+        <!-- Card 2 -->
+        <a href="./projects/Joachim-2IM-vurdering/index.html" class="card">
+          <div>
+            <h2>Joachim-2IM-vurdering</h2>
+            <p>Assessment project for 2IM.</p>
+          </div>
+          <div class="arrow">&rarr;</div>
+        </a>
 
-    <footer></footer>
+        <!-- Card 3 -->
+        <a href="./projects/fuzzdoodle.github.io/index.html" class="card">
+          <div>
+            <h2>Fuzzdoodle</h2>
+            <p>Project repository for fuzzdoodle.github.io</p>
+            <p>Was supposed to recreate Steam</p>
+          </div>
+          <div class="arrow">&rarr;</div>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="./projects/SilentiaSwordia.github.io/index.html" class="card">
+          <div>
+            <h2>SilentiaSwordia</h2>
+            <p>First repo made, what I knew at the start</p>
+          </div>
+          <div class="arrow">&rarr;</div>
+        </a>
+      </main>
+
+      <footer></footer>
+    </div>
+
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      // Initialize Supabase
+      const supabase = createClient(
+        "https://tbywtsnllvkoiuxnxjpq.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRieXd0c25sbHZrb2l1eG54anBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMDc0MDEsImV4cCI6MjA3Njc4MzQwMX0.RvPYOW13Ypmi10zSyPDJgITdzHZpil2FBS6E7GzIWvs",
+        {
+          auth: {
+            storage: localStorage,
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true,
+          },
+        }
+      );
+
+      // DOM Elements
+      const authPanel = document.getElementById("authPanel");
+      const authForm = document.getElementById("authForm");
+      const authEmail = document.getElementById("authEmail");
+      const authPassword = document.getElementById("authPassword");
+      const authSubmit = document.getElementById("authSubmit");
+      const authMessage = document.getElementById("authMessage");
+      const mainContent = document.getElementById("mainContent");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const userInfo = document.getElementById("userInfo");
+      const userEmail = document.getElementById("userEmail");
+
+      // Check authentication on load
+      async function checkAuth() {
+        const { data } = await supabase.auth.getSession();
+        const session = data.session;
+
+        if (session) {
+          showMainContent(session.user.email);
+        } else {
+          showAuthPanel();
+        }
+      }
+
+      function showAuthPanel() {
+        authPanel.classList.remove("hidden");
+        mainContent.classList.remove("visible");
+        logoutBtn.style.display = "none";
+        userInfo.style.display = "none";
+      }
+
+      function showMainContent(email) {
+        authPanel.classList.add("hidden");
+        mainContent.classList.add("visible");
+        logoutBtn.style.display = "block";
+        userInfo.style.display = "block";
+        userEmail.textContent = email;
+      }
+
+      function showMessage(text, type) {
+        authMessage.textContent = text;
+        authMessage.className = `auth-message ${type}`;
+        authMessage.style.display = "block";
+      }
+
+      // Handle login
+      authForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        authSubmit.disabled = true;
+
+        const email = authEmail.value.trim();
+        const password = authPassword.value;
+
+        if (!email || !password) {
+          showMessage("Please fill in all fields", "error");
+          authSubmit.disabled = false;
+          return;
+        }
+
+        showMessage("Logging in...", "loading");
+
+        try {
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+          });
+
+          if (error) {
+            showMessage(error.message || "Login failed", "error");
+            authSubmit.disabled = false;
+            return;
+          }
+
+          if (data.session) {
+            showMessage("Login successful!", "success");
+            setTimeout(() => {
+              showMainContent(email);
+              authForm.reset();
+            }, 500);
+          }
+        } catch (err) {
+          showMessage(err.message || "An error occurred", "error");
+          authSubmit.disabled = false;
+        }
+      });
+
+      // Handle logout
+      logoutBtn.addEventListener("click", async () => {
+        await supabase.auth.signOut();
+        showAuthPanel();
+        authForm.reset();
+        authMessage.style.display = "none";
+      });
+
+      // Check auth on page load
+      checkAuth();
+
+      // Listen for auth changes
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (session) {
+          showMainContent(session.user.email);
+        } else {
+          showAuthPanel();
+        }
+      });
+    </script>
   </body>
 </html>
