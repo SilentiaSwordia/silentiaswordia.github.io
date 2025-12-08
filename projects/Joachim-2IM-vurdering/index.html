@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joachim-2IM-vurdering</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Link elementet lar meg linke sammen to dokumenter, i dette tilfellet -->
+    <!-- linker jeg CSS dokumentet mitt til HTML dokumentet mitt -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Sans&display=swap");
+    </style>
+    <!-- Style lar meg legge inn info om styling, kan brukes istedetfor ett CSS -->
+    <!-- dokument, men jeg bruker det til å importere en font -->
+    <link rel="icon" type="image/jpeg" href="./tab_icon.jpeg" />
+    <!-- Legger til ett ikon til fanen-->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <!-- Button elementet lager en knapp som kan trykkes på, men denne vil -->
+        <!-- ikke vises med mindre vinduet til nettleseren er for lite til å vise -->
+        <!-- hele nav-baren-->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <!-- Li er en liste, ul elementet er parent elementet dens-->
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <!-- A elementet brukes til å lage en link, så lenge den har ett href -->
+              <!-- attributt -->
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="index.html"
+                role="button"
+                aria-expanded="false"
+                aria-current="page"
+              >
+                Dropdown link
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Nav elementet representerer den delen av siden som brukes til å linke -->
+    <!-- til andre sider -->
+    <div class="topContainer">
+      <div class="topItem">
+        <div class="topImage">
+          <img
+            class="image-styling"
+            src="./test_image.jpg"
+            alt="Placeholder 1"
+          />
+        </div>
+        <div class="topImageText">
+          <p class="momo-trust-sans-alt-font">Your text goes here</p>
+        </div>
+      </div>
+      <div class="topItem">
+        <div class="topImage">
+          <img
+            class="image-styling"
+            src="./test_image2.jpg"
+            alt="Placeholder 2"
+          />
+        </div>
+        <div class="topImageText">
+          <p class="momo-trust-sans-alt-font">Your text goes here</p>
+        </div>
+      </div>
+      <div class="topItem">
+        <div class="topImage">
+          <img
+            class="image-styling"
+            src="./placeholder_image.PNG"
+            alt="Placeholder 3"
+          />
+        </div>
+        <div class="topImageText">
+          <p class="momo-trust-sans-alt-font">Your text goes here</p>
+        </div>
+      </div>
+    </div>
+    <div class="midContainer">
+      <div class="midItem">
+        <div class="midImage">
+          <img
+            class="image-styling"
+            src="./placeholder_image.PNG"
+            alt="Placeholder 1"
+          />
+        </div>
+        <div class="midImageText">
+          <p class="momo-trust-sans-alt-font">Your text goes here</p>
+        </div>
+      </div>
+      <div class="midItem">
+        <div class="midImage">
+          <img
+            class="image-styling"
+            src="./placeholder_image.PNG"
+            alt="Placeholder 2"
+          />
+        </div>
+        <div class="midImageText">
+          <p class="momo-trust-sans-alt-font">Your text goes here</p>
+        </div>
+      </div>
+      <div class="midItem">
+        <div class="midImage">
+          <img
+            class="image-styling"
+            src="./placeholder_image.PNG"
+            alt="Placeholder 3"
+          />
+        </div>
+        <div class="midImageText">
+          <p class="momo-trust-sans-alt-font">Your text goes here</p>
+        </div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+      <div
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-delay="5000"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Notice!</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body momo-trust-sans-alt-font">
+          This page uses cookies
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (bundle includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Init toast on page load -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var toastEl = document.querySelector(".toast");
+        if (toastEl && typeof bootstrap !== "undefined") {
+          var toast = new bootstrap.Toast(toastEl);
+          toast.show();
+        }
+      });
+    </script>
+    <div class="spacer"></div>
+  </body>
+</html>

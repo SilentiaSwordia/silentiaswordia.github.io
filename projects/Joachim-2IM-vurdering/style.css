@@ -1,0 +1,97 @@
+.image-styling {
+  height: 250px;
+  width: auto;
+  border-radius: 10px;
+}
+
+.momo-trust-sans-alt-font {
+  font-family: "Momo Trust Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.topContainer {
+  justify-self: center;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  gap: 10%;
+  flex-wrap: wrap;
+}
+
+.topItem {
+  padding: 3%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 15px;
+  justify-content: center;
+}
+
+.topImageText {
+  justify-self: center;
+  margin-top: 10px;
+}
+
+.midContainer {
+  justify-self: center;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  gap: 10%;
+  flex-wrap: wrap;
+}
+
+.midItem {
+  padding: 3%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 15px;
+}
+
+.midImageText {
+  justify-self: center;
+  margin-top: 10px;
+}
+
+.spacer {
+  height: 50px;
+}
+
+.navbar-nav {
+  .active {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: aliceblue;
+  }
+  .alt-color {
+    color: lightgrey;
+  }
+}
+
+.navbar {
+  size-adjust: auto;
+  height: 6em;
+}
+
+.container-fluid {
+  padding-left: 4.5% !important;
+}
+
+.nav-link.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown > .dropdown-menu {
+  margin-top: 0;
+}

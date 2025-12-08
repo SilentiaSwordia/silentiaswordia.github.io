@@ -1,0 +1,61 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: lightblue;
+}
+
+p {
+  font-size: 16px;
+  color: black;
+}
+
+#logo {
+  width: 50px;
+  height: auto;
+}
+
+.top-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 600px;
+  background-color: white;
+  p {
+    font-size: 20px;
+    color: black;
+  }
+  a {
+    font-size: 20px;
+    color: black;
+  }
+}
+
+.mid-container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 600px;
+  background-color: rgb(125, 5, 93);
+}
+
+.footer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 600px;
+  background-color: rgb(174, 160, 7);
+}
+/* This rule comes last, so it wins! */
+.btn-primary {
+  background-color: #9370db; /* A nice medium purple */
+  border-color: #7a5fb4;
+  font-weight: bold;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}

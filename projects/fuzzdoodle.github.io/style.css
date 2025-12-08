@@ -1,0 +1,65 @@
+.top-container {
+  background-color: #000000;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  flex-direction: row;
+  display: flex;
+}
+
+/* A more specific selector */
+.nav-link.dropdown-toggle::after {
+  display: none;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Optional: Adjust margin to prevent the menu from closing
+  when moving the cursor from the link to the menu.
+*/
+.dropdown > .dropdown-menu {
+  margin-top: 0;
+}
+
+.active {
+  color: #1a9fff !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 2.5px !important;
+  text-underline-offset: 4px !important;
+}
+
+.navbar-brand {
+  margin-left: 12%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.custom-navbar-padding {
+  padding-left: 11% !important; /* You can use %, px, rem, etc. */
+}
+
+.nav-font {
+  font-size: 10px;
+  font-weight: 900 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0.35Q !important;
+}
+
+.dropdown-font {
+  font-size: 12px;
+  font-weight: lighter !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.dropdown-menu {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: 5px 1rem 2rem rgba(0, 0, 0, 0.558);
+}
+
+.custom-store-about-navbar-padding {
+  padding-left: 5% !important;
+}
