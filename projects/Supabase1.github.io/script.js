@@ -8,7 +8,7 @@ const supabase = createClient(
     auth: {
       storage: sessionStorage, // <-- Dette er magien!
       autoRefreshToken: true,
-      persistSession: true,
+      persistSession: false,
       detectSessionInUrl: true,
     },
   }
@@ -57,12 +57,21 @@ tabButtons.forEach((btn) => {
 
 /** 5) Oppdater UI (bruker + rolle) */
 async function refreshAuthUI() {
-  // BRUK getSession() I STEDET FOR getUser()
-  // Denne returnerer bare null hvis du ikke er logget inn, uten å lage rød error.
-  const {
-    data: { session },
-    error,
-  } = await supabase.auth.getSession();
+  const { data } = await supabase.auth.getSession();
+  const session = data.session;
+  const currentUser = session?.user;
+
+  // Toggle main content based on login state
+  const contentLoggedOut = document.getElementById("contentLoggedOut");
+  const contentLoggedIn = document.getElementById("contentLoggedIn");
+
+  if (currentUser) {
+    if (contentLoggedOut) contentLoggedOut.style.display = "none";
+    if (contentLoggedIn) contentLoggedIn.style.display = "block";
+  } else {
+    if (contentLoggedOut) contentLoggedOut.style.display = "block";
+    if (contentLoggedIn) contentLoggedIn.style.display = "none";
+  }
 
   // 1. Sjekk om vi faktisk har en bruker-sesjon
   if (!session) {
@@ -79,13 +88,12 @@ async function refreshAuthUI() {
   }
 
   // 2. Hvis vi kommer hit, ER vi logget inn.
-  const user = session.user;
-
+  // Bruk currentUser her
   // Hent profil og rolle fra databasen
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
-    .eq("id", user.id)
+    .eq("id", currentUser.id)
     .maybeSingle();
 
   const role = profile?.role ?? "user";
@@ -93,7 +101,7 @@ async function refreshAuthUI() {
   // 3. Oppdater UI for innlogget bruker
   loggedOut.style.display = "none";
   loggedIn.style.display = "";
-  whoami.textContent = `Innlogget som ${user.email}`;
+  whoami.textContent = `Innlogget som ${currentUser.email}`;
   roleBadge.textContent = `Rolle: ${role}`;
   userBadge.textContent = role === "admin" ? "Admin" : "Innlogget";
 
@@ -169,6 +177,12 @@ signupForm.addEventListener("submit", async (e) => {
 
 /** 8) Logg ut */
 document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await supabase.auth.signOut();
+  await refreshAuthUI();
+});
+
+/** 8b) Logg ut fra navbar */
+logoutNavBtn.addEventListener("click", async () => {
   await supabase.auth.signOut();
   await refreshAuthUI();
 });
