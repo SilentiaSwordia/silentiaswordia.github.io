@@ -192,6 +192,92 @@ footer {
   transition: opacity 0.3s ease;
 }
 
+/* Tabbed auth UI (match Supabase1 look) */
+.auth-modal {
+  width: 92%;
+  max-width: 420px;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.btn-tab {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-tab.active {
+  background: var(--card-bg);
+  border-color: rgba(186, 186, 186, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) inset;
+  color: #eaeaea;
+}
+
+/* Keep the signup tab label color consistent with other tabs */
+.btn-tab[data-tab="signup"] {
+  color: #000;
+}
+
+.btn-tab[data-tab="signup"].active {
+  color: #eaeaea;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  /* Use symmetric padding and box-sizing so left/right spacing is equal */
+  box-sizing: border-box;
+  padding: 0.75rem;
+  margin-bottom: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  font-size: 0.95rem;
+}
+
+.form-control::placeholder {
+  color: #999;
+}
+
+.btn-block {
+  display: inline-block;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: #111;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-block:hover {
+  background: #0b0b0b;
+}
+
+.auth-msg {
+  color: #999;
+}
+
+#authLoggedIn p {
+  color: #ddd;
+}
+
+/* Make the Create account button text white (restore default) */
+#signupSubmit {
+  color: #fff;
+}
+
 #mainContent.visible {
   opacity: 1;
   pointer-events: auto;

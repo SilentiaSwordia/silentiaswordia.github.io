@@ -7,28 +7,102 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Auth Panel - Initially visible -->
+    <!-- Auth Panel - tabbed like Supabase1 -->
     <div id="authPanel">
       <div class="auth-modal">
-        <h2>Login to Portfolio</h2>
+        <h2>Access Portfolio</h2>
+        <div
+          class="auth-tabs"
+          style="
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 12px;
+          "
+        >
+          <button type="button" class="btn-tab active" data-tab="login">
+            Login
+          </button>
+          <button type="button" class="btn-tab" data-tab="signup">
+            Create account
+          </button>
+        </div>
+
         <div id="authMessage" class="auth-message" style="display: none"></div>
-        <form id="authForm" class="auth-form">
-          <input
-            type="email"
-            id="authEmail"
-            placeholder="Email"
-            required
-            autocomplete="email"
-          />
-          <input
-            type="password"
-            id="authPassword"
-            placeholder="Password"
-            required
-            autocomplete="current-password"
-          />
-          <button type="submit" id="authSubmit">Login</button>
-        </form>
+
+        <div id="authLoggedOut">
+          <!-- Login panel -->
+          <form id="loginForm" data-panel="login" class="auth-form">
+            <input
+              class="form-control"
+              type="email"
+              id="loginEmail"
+              placeholder="Email"
+              required
+              autocomplete="email"
+            />
+            <input
+              class="form-control"
+              type="password"
+              id="loginPass"
+              placeholder="Password"
+              required
+              autocomplete="current-password"
+            />
+            <button type="submit" id="loginSubmit">Login</button>
+            <div
+              id="loginMsg"
+              class="auth-msg"
+              style="margin-top: 8px; font-size: 0.9rem; color: #888"
+            ></div>
+          </form>
+
+          <!-- Signup panel -->
+          <form
+            id="signupForm"
+            data-panel="signup"
+            class="auth-form"
+            style="display: none"
+          >
+            <input
+              class="form-control"
+              type="text"
+              id="signupName"
+              placeholder="Display name (optional)"
+            />
+            <input
+              class="form-control"
+              type="email"
+              id="signupEmail"
+              placeholder="Email"
+              required
+              autocomplete="email"
+            />
+            <input
+              class="form-control"
+              type="password"
+              id="signupPass"
+              placeholder="Password (min 6 chars)"
+              required
+              autocomplete="new-password"
+            />
+            <button type="submit" id="signupSubmit">Create account</button>
+            <div
+              id="signupMsg"
+              class="auth-msg"
+              style="margin-top: 8px; font-size: 0.9rem; color: #888"
+            ></div>
+          </form>
+        </div>
+
+        <div id="authLoggedIn" style="display: none; margin-top: 8px">
+          <p
+            id="whoami"
+            style="margin: 0 0 8px 0; font-size: 0.95rem; color: #555"
+          ></p>
+          <div id="roleBadge" class="small" style="margin-bottom: 8px"></div>
+          <button id="panelLogoutBtn" class="btn-block">Log out</button>
+        </div>
       </div>
     </div>
 
@@ -131,15 +205,45 @@
 
       // DOM Elements
       const authPanel = document.getElementById("authPanel");
-      const authForm = document.getElementById("authForm");
-      const authEmail = document.getElementById("authEmail");
-      const authPassword = document.getElementById("authPassword");
-      const authSubmit = document.getElementById("authSubmit");
+      const tabButtons = document.querySelectorAll("[data-tab]");
+      const panels = document.querySelectorAll("[data-panel]");
+
+      const loginForm = document.getElementById("loginForm");
+      const loginEmail = document.getElementById("loginEmail");
+      const loginPass = document.getElementById("loginPass");
+      const loginSubmit = document.getElementById("loginSubmit");
+      const loginMsg = document.getElementById("loginMsg");
+
+      const signupForm = document.getElementById("signupForm");
+      const signupName = document.getElementById("signupName");
+      const signupEmail = document.getElementById("signupEmail");
+      const signupPass = document.getElementById("signupPass");
+      const signupSubmit = document.getElementById("signupSubmit");
+      const signupMsg = document.getElementById("signupMsg");
+
       const authMessage = document.getElementById("authMessage");
       const mainContent = document.getElementById("mainContent");
       const logoutBtn = document.getElementById("logoutBtn");
+      const panelLogoutBtn = document.getElementById("panelLogoutBtn");
       const userInfo = document.getElementById("userInfo");
       const userEmail = document.getElementById("userEmail");
+      const authLoggedIn = document.getElementById("authLoggedIn");
+      const authLoggedOut = document.getElementById("authLoggedOut");
+
+      // Tab switching (data-tab / data-panel)
+      tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const tab = btn.dataset.tab;
+          panels.forEach((p) => {
+            p.style.display = p.dataset.panel === tab ? "flex" : "none";
+          });
+        });
+      });
+
+      // show login panel by default
+      document.querySelector('[data-tab="login"]').click();
 
       // Check authentication on load
       async function checkAuth() {
@@ -156,16 +260,20 @@
       function showAuthPanel() {
         authPanel.classList.remove("hidden");
         mainContent.classList.remove("visible");
-        logoutBtn.style.display = "none";
-        userInfo.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = "none";
+        if (userInfo) userInfo.style.display = "none";
+        if (authLoggedIn) authLoggedIn.style.display = "none";
+        if (authLoggedOut) authLoggedOut.style.display = "block";
       }
 
       function showMainContent(email) {
         authPanel.classList.add("hidden");
         mainContent.classList.add("visible");
-        logoutBtn.style.display = "block";
-        userInfo.style.display = "block";
-        userEmail.textContent = email;
+        if (logoutBtn) logoutBtn.style.display = "block";
+        if (userInfo) userInfo.style.display = "block";
+        if (userEmail) userEmail.textContent = email;
+        if (authLoggedIn) authLoggedIn.style.display = "block";
+        if (authLoggedOut) authLoggedOut.style.display = "none";
       }
 
       function showMessage(text, type) {
@@ -175,16 +283,17 @@
       }
 
       // Handle login
-      authForm.addEventListener("submit", async (e) => {
+      loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        authSubmit.disabled = true;
+        loginSubmit.disabled = true;
+        loginMsg.textContent = "";
 
-        const email = authEmail.value.trim();
-        const password = authPassword.value;
+        const email = loginEmail.value.trim();
+        const password = loginPass.value;
 
         if (!email || !password) {
           showMessage("Please fill in all fields", "error");
-          authSubmit.disabled = false;
+          loginSubmit.disabled = false;
           return;
         }
 
@@ -198,7 +307,7 @@
 
           if (error) {
             showMessage(error.message || "Login failed", "error");
-            authSubmit.disabled = false;
+            loginSubmit.disabled = false;
             return;
           }
 
@@ -206,22 +315,83 @@
             showMessage("Login successful!", "success");
             setTimeout(() => {
               showMainContent(email);
-              authForm.reset();
+              loginForm.reset();
             }, 500);
           }
         } catch (err) {
           showMessage(err.message || "An error occurred", "error");
-          authSubmit.disabled = false;
+          loginSubmit.disabled = false;
         }
       });
 
-      // Handle logout
-      logoutBtn.addEventListener("click", async () => {
+      // Handle signup / create account
+      signupForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        signupSubmit.disabled = true;
+        signupMsg.textContent = "";
+
+        const email = signupEmail.value.trim();
+        const password = signupPass.value;
+        const name = signupName.value.trim();
+
+        if (!email || !password) {
+          showMessage("Please fill in all fields", "error");
+          signupSubmit.disabled = false;
+          return;
+        }
+
+        showMessage("Creating account...", "loading");
+
+        try {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+          });
+
+          if (error) {
+            showMessage(error.message || "Signup failed", "error");
+            signupSubmit.disabled = false;
+            return;
+          }
+
+          // If session exists, user is signed in right away
+          if (data.session) {
+            showMessage("Account created and logged in!", "success");
+            // optionally set profile here using RPC or DB insert
+            setTimeout(() => {
+              showMainContent(email);
+              signupForm.reset();
+            }, 500);
+            return;
+          }
+
+          // Otherwise, an email confirmation may be required
+          showMessage(
+            "Account created. Check your email to confirm and then log in.",
+            "success"
+          );
+          // switch to login tab
+          document.querySelector('[data-tab="login"]').click();
+          signupForm.reset();
+        } catch (err) {
+          showMessage(err.message || "An error occurred", "error");
+        } finally {
+          signupSubmit.disabled = false;
+        }
+      });
+
+      // Handle logout from top-level and panel logout button
+      async function performLogout() {
         await supabase.auth.signOut();
         showAuthPanel();
-        authForm.reset();
+        loginForm.reset();
+        signupForm.reset();
         authMessage.style.display = "none";
-      });
+      }
+
+      if (logoutBtn) logoutBtn.addEventListener("click", performLogout);
+      if (panelLogoutBtn)
+        panelLogoutBtn.addEventListener("click", performLogout);
 
       // Check auth on page load
       checkAuth();
