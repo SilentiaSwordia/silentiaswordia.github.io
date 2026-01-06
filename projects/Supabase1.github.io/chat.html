@@ -115,7 +115,27 @@
     </main>
 
     <!-- Laster Supabase-biblioteket som gjør det mulig å kommunisere med databasen -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+    <!-- Fallback: load ESM createClient and expose it as a global for older pages -->
+    <script type="module">
+      try {
+        const mod = await import(
+          "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
+        );
+        if (mod && typeof mod.createClient === "function") {
+          // Expose a global createClient so the non-module init code can use it
+          window.createClient = mod.createClient;
+          window.supabase = window.supabase || {
+            createClient: mod.createClient,
+          };
+          console.info(
+            "Supabase ESM loaded and createClient exposed as global"
+          );
+        }
+      } catch (e) {
+        console.warn("Supabase ESM loader failed:", e);
+      }
+    </script>
 
     <!-- Her starter vårt eget JavaScript -->
     <script>
@@ -123,10 +143,66 @@
       const SUPABASE_URL = "https://tbywtsnllvkoiuxnxjpq.supabase.co";
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRieXd0c25sbHZrb2l1eG54anBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMDc0MDEsImV4cCI6MjA3Njc4MzQwMX0.RvPYOW13Ypmi10zSyPDJgITdzHZpil2FBS6E7GzIWvs";
-      const supabase = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
+
+      // Supabase client will be set once available (ESM loader may be async).
+      let supabase = null;
+
+      // Poll for a global `createClient`/`supabase.createClient` that the CDN or ESM loader may expose.
+      async function waitForCreateClient(timeout = 3000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+          try {
+            if (
+              window.supabase &&
+              typeof window.supabase.createClient === "function"
+            ) {
+              return window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+              );
+            }
+            if (typeof window.createClient === "function") {
+              return window.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+            if (
+              window.Supabase &&
+              typeof window.Supabase.createClient === "function"
+            ) {
+              return window.Supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+              );
+            }
+          } catch (e) {
+            console.debug("Supabase check error:", e);
+          }
+          await new Promise((r) => setTimeout(r, 50));
+        }
+        return null;
+      }
+
+      // Try to initialize soon after load; if initialized, load messages automatically.
+      (async () => {
+        const statusElFallback = document.getElementById("status");
+        if (statusElFallback)
+          statusElFallback.textContent = "Initierer tilkobling...";
+        supabase = await waitForCreateClient(3000);
+        if (supabase) {
+          console.info("Supabase client initialised");
+          if (statusElFallback)
+            statusElFallback.textContent = "Koblet til Supabase.";
+          try {
+            await loadMessages();
+          } catch (e) {
+            console.error("Error loading messages after init:", e);
+          }
+        } else {
+          console.error("Supabase init error: library not found after timeout");
+          if (statusElFallback)
+            statusElFallback.textContent =
+              "Feil: Supabase-biblioteket ikke lastet. Sjekk konsollen.";
+        }
+      })();
 
       // Henter elementene fra skjemaet og siden
       const form = document.getElementById("form");
@@ -175,6 +251,11 @@
       // Leser meldinger fra databasen og viser dem
       async function loadMessages() {
         statusEl.textContent = "Laster...";
+        if (!supabase) {
+          statusEl.textContent =
+            "Ingen database-tilkobling (Supabase ikke lastet).";
+          return;
+        }
         const { data, error } = await supabase
           .from("messages")
           .select("*")
@@ -214,6 +295,12 @@
         statusEl.textContent = "Lagrer...";
 
         // Sender data til Supabase-tabellen "messages"
+        if (!supabase) {
+          statusEl.textContent =
+            "Kan ikke sende: ingen DB-tilkobling (Supabase ikke lastet).";
+          submitBtn.disabled = false;
+          return;
+        }
         const { error } = await supabase
           .from("messages")
           .insert({ content: name + "::" + msg });
