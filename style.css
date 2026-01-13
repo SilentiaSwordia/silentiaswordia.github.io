@@ -305,7 +305,7 @@ footer {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  color: #333;
+  color: var(--accent-color);
   font-size: 0.9rem;
   z-index: 999;
 }
