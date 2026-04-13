@@ -242,38 +242,42 @@ fetchCurrency();
 let shanaWouldLove = [];
 
 function fetchRandomInsp() {
-  // Use Quotable API: No proxy needed, supports CORS natively, works on GitHub Pages
-  const quotesUrl = `https://api.quotable.io/random?t=${Date.now()}`;
+  // 1. Use the 'get' endpoint (this is the most stable version for CORS)
+  const targetUrl = `https://zenquotes.io/api/random?t=${Date.now()}`;
+  const proxiedUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
 
   axios
-    .get(quotesUrl)
+    .get(proxiedUrl)
     .then((response) => {
-      // Quotable returns a single object, not an array
-      const data = response.data;
-      shanaQuote.textContent = data.content;
-      shanaAuthor.textContent = "- " + data.author;
+      // 2. AllOrigins 'get' returns a wrapper. The actual data is a string in .contents
+      if (response.data && response.data.contents) {
+        const data = JSON.parse(response.data.contents);
+
+        shanaQuote.textContent = data[0].q;
+        shanaAuthor.textContent = "- " + data[0].a;
+      }
     })
     .catch((error) => {
-      console.error("Error fetching Quote:", error);
-      shanaQuote.textContent = "Keep going, you're doing great!";
-      shanaAuthor.textContent = "- System";
+      console.error("Fetch Error:", error);
+      // Fallback text so the UI doesn't look broken
+      shanaQuote.textContent = "Believe in yourself and all that you are.";
+      shanaAuthor.textContent = "- Christian D. Larson";
     });
 
-  // dog.ceo is perfect for this
+  // Dog API - usually very reliable
   axios
     .get("https://dog.ceo/api/breeds/image/random")
     .then((response) => {
-      let shanaInspPics = document.createElement("img");
-      shanaInspPics.src = response.data.message;
-      shanaInspPics.alt = "A cute dog";
-      shanaInspPics.width = 300;
-      shanaInspPics.height = 200;
-      shanaInspPics.style.objectFit = "cover";
-
-      shanaInspPicsContainer.innerHTML = "";
-      shanaInspPicsContainer.appendChild(shanaInspPics);
+      shanaInspPicsContainer.innerHTML = ""; // Clear old image
+      let img = document.createElement("img");
+      img.src = response.data.message;
+      img.alt = "A cute dog";
+      img.width = 300;
+      img.height = 200;
+      img.style.objectFit = "cover";
+      shanaInspPicsContainer.appendChild(img);
     })
-    .catch((error) => console.error("Error fetching dog picture:", error));
+    .catch((err) => console.error("Dog API Error:", err));
 }
 
 // Fetch initial quote on page load
