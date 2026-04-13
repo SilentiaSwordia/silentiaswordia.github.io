@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeplan - Akademiet</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link href="styletimeplan.css" rel="stylesheet" />
+  <script type="module" src="script2.js"></script>
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h2>Meny</h2>
+        <div class="sidebar-actions">
+          <i class="fa-solid fa-thumbtack" title="Fest meny"></i>
+          <i class="fa-solid fa-lock-open" title="Lås opp"></i>
+          <i class="fa-solid fa-times" title="Lukk"></i>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="startsiden.html"><i class="fa-solid fa-border-all"></i> Startsiden</a></li>
+        <li class="active"><a href="#"><i class="fa-regular fa-calendar-days"></i> Timeplan</a></li>
+        <li><a href="fravær.html"><i class="fa-solid fa-user-xmark"></i> Fravær</a></li>
+        <li class="has-dropdown">
+          <a href="#"><i class="fa-solid fa-gauge-high"></i> Vurderinger<i
+              class="fa-solid fa-chevron-right dropdown-arrow"></i></a>
+          <ul class="sub-menu">
+            <li><a href="prøver.html">Prøver</a></li>
+            <li><a href="enkeltvurderinger.html">Enkeltvurderinger</a></li>
+            <li><a href="egenvurderinger.html">Egenvurderinger</a></li>
+            <li><a href="karakterer.html">Karakterer</a></li>
+            <li><a href="ordenOgOppførsel.html">Orden/Oppførsel</a></li>
+            <li><a href="eksamen.html">Eksamen</a></li>
+          </ul>
+        </li>
+        <li><a href="meldinger.html"><i class="fa-regular fa-comments"></i> Meldinger</a></li>
+        <li><a href="oppslagstavle.html"><i class="fa-solid fa-thumbtack"></i> Oppslagstavle</a></li>
+        <li class="has-dropdown">
+          <a href="#"><i class="fa-regular fa-folder-open"></i> Dokumenter<i
+              class="fa-solid fa-chevron-right dropdown-arrow"></i></a>
+          <ul class="sub-menu">
+            <li><a href="mineDokumenter.html">Mine dokumenter</a></li>
+            <li><a href="deltMedMeg.html">Delt med meg</a></li>
+            <li><a href="elevMappe.html">Elevmappe</a></li>
+          </ul>
+        </li>
+        <li><a href="personalia.html"><i class="fa-regular fa-user"></i> Personalia</a></li>
+        <li><a href="samtykke.html"><i class="fa-solid fa-handshake"></i> Samtykke</a></li>
+        <li><a href="skolerute.html"><i class="fa-regular fa-calendar-check"></i> Skolerute</a></li>
+        <li><a href="arsUkeplan.html"><i class="fa-solid fa-list-ul"></i> Års-/ukeplan</a></li>
+        <li><a href="elevsamtaler.html"><i class="fa-regular fa-message"></i> Elevsamtaler</a></li>
+        <li><a href="fagsamtaler.html"><i class="fa-regular fa-comments"></i> Fagsamtaler</a></li>
+        <li><a href="soknader.html"><i class="fa-regular fa-file-lines"></i> Søknader</a></li>
+        <li><a href="info.html"><i class="fa-solid fa-circle-info"></i> Info</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="logo">
+            <span class="logo-icon"><img src="akademiet.png" alt="Akademiet Drammen"
+                style="width:100px; height:40px;"></span>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <h1>Akademiet Drammen - Timeplan</h1>
+        </div>
+
+        <div class="topbar-right">
+          <div class="user-profile">
+            <i class="fa-solid fa-circle-user profile-icon"></i>
+            <span class="user-name">Joachim Ramberg Langholen</span>
+            <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+
+            <div class="profile-dropdown">
+              <a href="innstillinger.html"><i class="fa-solid fa-cog"></i> Innstillinger</a>
+              <a href="index.html">
+                <img src="login-xxl-light.png" alt="Logg ut" class="logout-icon theme-icon-dark">
+                <img src="login-xxl-dark.png" alt="Logg ut" class="logout-icon theme-icon-light">
+                Logg ut
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Sub Header Tabs -->
+      <div class="tabs-container">
+        <div class="tab active"><i class="fa-solid fa-calendar-day"></i> Min</div>
+        <div class="tab"><i class="fa-regular fa-calendar"></i> Ukeplan</div>
+        <div class="tab"><i class="fa-solid fa-chalkboard-user"></i> Fag</div>
+        <div class="tab"><i class="fa-solid fa-clipboard-user"></i> Lærere</div>
+      </div>
+
+      <!-- Dashboard / Calendar Area (Skipped per user request, placeholder shown) -->
+      <main class="content-area">
+        <div class="content-placeholder">
+          <!-- The rest of the period plan would go here -->
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>

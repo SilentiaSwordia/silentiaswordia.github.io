@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevmappe - Akademiet</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="styleElevMappe.css" rel="stylesheet" />
+    <script type="module" src="script2.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Meny</h2>
+                <div class="sidebar-actions">
+                    <i class="fa-solid fa-thumbtack" title="Fest meny"></i>
+                    <i class="fa-solid fa-lock-open" title="Lås opp"></i>
+                    <i class="fa-solid fa-times" title="Lukk"></i>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="startsiden.html"><i class="fa-solid fa-border-all"></i> Startsiden</a></li>
+                <li><a href="#"><i class="fa-regular fa-calendar-days"></i> Timeplan</a></li>
+                <li><a href="fravær.html"><i class="fa-solid fa-user-xmark"></i> Fravær</a></li>
+                <li class="has-dropdown">
+                    <a href="#"><i class="fa-solid fa-gauge-high"></i> Vurderinger<i
+                            class="fa-solid fa-chevron-right dropdown-arrow"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="prøver.html">Prøver</a></li>
+                        <li><a href="enkeltvurderinger.html">Enkeltvurderinger</a></li>
+                        <li><a href="egenvurderinger.html">Egenvurderinger</a></li>
+                        <li><a href="karakterer.html">Karakterer</a></li>
+                        <li><a href="ordenOgOppførsel.html">Orden/Oppførsel</a></li>
+                        <li><a href="eksamen.html">Eksamen</a></li>
+                    </ul>
+                </li>
+                <li><a href="meldinger.html"><i class="fa-regular fa-comments"></i> Meldinger</a></li>
+                <li><a href="oppslagstavle.html"><i class="fa-solid fa-thumbtack"></i> Oppslagstavle</a></li>
+                <li class="has-dropdown">
+                    <a href="#"><i class="fa-regular fa-folder-open"></i> Dokumenter<i
+                            class="fa-solid fa-chevron-right dropdown-arrow"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="mineDokumenter.html">Mine dokumenter</a></li>
+                        <li><a href="deltMedMeg.html">Delt med meg</a></li>
+                        <li class="active"><a href="elevMappe.html">Elevmappe</a></li>
+                    </ul>
+                </li>
+                <li><a href="personalia.html"><i class="fa-regular fa-user"></i> Personalia</a></li>
+                <li><a href="samtykke.html"><i class="fa-solid fa-handshake"></i> Samtykke</a></li>
+                <li><a href="skolerute.html"><i class="fa-regular fa-calendar-check"></i> Skolerute</a></li>
+                <li><a href="arsUkeplan.html"><i class="fa-solid fa-list-ul"></i> Års-/ukeplan</a></li>
+                <li><a href="elevsamtaler.html"><i class="fa-regular fa-message"></i> Elevsamtaler</a></li>
+                <li><a href="fagsamtaler.html"><i class="fa-regular fa-comments"></i> Fagsamtaler</a></li>
+                <li><a href="soknader.html"><i class="fa-regular fa-file-lines"></i> Søknader</a></li>
+                <li><a href="info.html"><i class="fa-solid fa-circle-info"></i> Info</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <div class="logo">
+                        <span class="logo-icon"><img src="akademiet.png" alt="Akademiet Drammen"
+                                style="width:100px; height:40px;"></span>
+                    </div>
+                </div>
+
+                <div class="topbar-center">
+                    <h1>Akademiet Drammen - Elevmappe</h1>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <i class="fa-solid fa-circle-user profile-icon"></i>
+                        <span class="user-name">Joachim Ramberg Langholen</span>
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+
+                        <div class="profile-dropdown">
+                            <a href="innstillinger.html"><i class="fa-solid fa-cog"></i> Innstillinger</a>
+                            <a href="index.html">
+                                <img src="login-xxl-light.png" alt="Logg ut" class="logout-icon theme-icon-dark">
+                                <img src="login-xxl-dark.png" alt="Logg ut" class="logout-icon theme-icon-light">
+                                Logg ut
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Elevmappe Document List Area -->
+            <main class="content-area" id="mainContentArea">
+                <div class="document-list">
+                    <!-- Item 1 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-word" style="color:#2b579a;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Matematikk_Innlevering_Kap1.docx</div>
+                            <div class="doc-desc">Innlevering Matematikk R1</div>
+                            <div class="doc-subdesc">Løst oppgave fra boken</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">25.03.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-pdf" style="color:#e55a4d;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Historie_Notater_Den_Kalde_Krigen.pdf</div>
+                            <div class="doc-desc">Notater fra forelesning</div>
+                            <div class="doc-subdesc">Sammendrag og tidslinje over hendelser</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">22.03.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-powerpoint" style="color:#b7472a;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Norsk_Presentasjon_Ibsen.pptx</div>
+                            <div class="doc-desc">Fagsamtale og presentasjon Norsk</div>
+                            <div class="doc-subdesc">Presentasjon om Henrik Ibsens liv og verk</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">18.03.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-pdf" style="color:#e55a4d;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Egenmelding_Sykdom_Februar.pdf</div>
+                            <div class="doc-desc">Fraværsdokumentasjon</div>
+                            <div class="doc-subdesc">Legeerklæring lagt ved</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">28.02.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-excel" style="color:#217346;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Kjemi_Forsok_Resultater.xlsx</div>
+                            <div class="doc-desc">Laboratorieøvelse Kjemi 1</div>
+                            <div class="doc-subdesc">Data og grafer over titrering</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">15.02.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-word" style="color:#2b579a;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Engelsk_Essay_Global_Warming.docx</div>
+                            <div class="doc-desc">Innlevering Engelsk 1</div>
+                            <div class="doc-subdesc">Argumentativt essay</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">10.02.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 7 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-pdf" style="color:#e55a4d;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Vedtak_Tilrettelegging_2026.pdf</div>
+                            <div class="doc-desc">Administrativt dokument</div>
+                            <div class="doc-subdesc">Vedtak om ekstra tid på eksamen</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">05.02.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 8 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-image" style="color:#f39c12;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Bildebevis_Prosjektkrasj.png</div>
+                            <div class="doc-desc">Dokumentasjon feilmelding</div>
+                            <div class="doc-subdesc">Skjermbilde sendt til IT for utvidet frist</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">01.02.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 9 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-word" style="color:#2b579a;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Samfunnsfag_Rapport_Valg.docx</div>
+                            <div class="doc-desc">Gruppeoppgave Samfunnskunnskap</div>
+                            <div class="doc-subdesc">Rapport om valgordningen i Norge</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">20.01.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 10 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-pdf" style="color:#e55a4d;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Karakterutskrift_Host_25.pdf</div>
+                            <div class="doc-desc">Karakterer Vg1</div>
+                            <div class="doc-subdesc">Utskrift av terminkarakterer</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">15.01.2026</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 11 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-pdf" style="color:#e55a4d;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Reglement_Akademiet_2025_2026.pdf</div>
+                            <div class="doc-desc">Skolens regler og retningslinjer</div>
+                            <div class="doc-subdesc">PDF kopi av skolereglementet</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">20.08.2025</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 12 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-powerpoint" style="color:#b7472a;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Kroppsoving_Opplegg.pptx</div>
+                            <div class="doc-desc">Egenvurdering gym kroppsøving</div>
+                            <div class="doc-subdesc">Presentasjon over planlagt treningsøkt</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">05.10.2025</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 13 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-excel" style="color:#217346;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Fysikk_Beregninger.xlsx</div>
+                            <div class="doc-desc">Fysikk 1 laboratorie</div>
+                            <div class="doc-subdesc">Hastighetstabeller og simuleringer</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">12.11.2025</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 14 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-pdf" style="color:#e55a4d;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Soknad_Permisjon_Idrett_Desember.pdf</div>
+                            <div class="doc-desc">Søknad om fri</div>
+                            <div class="doc-subdesc">Godkjent søknad for fotballturnering</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">25.11.2025</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                    <!-- Item 15 -->
+                    <div class="document-item">
+                        <div class="doc-icon"><i class="fa-solid fa-file-word" style="color:#2b579a;"></i></div>
+                        <div class="doc-info">
+                            <div class="doc-title">Spansk_Grammatikk_Oppsumerring.docx</div>
+                            <div class="doc-desc">Notater til fremmedspråk</div>
+                            <div class="doc-subdesc">Uregelmessige verb kap 4 og 5</div>
+                        </div>
+                        <div class="doc-date">
+                            <div class="date-label">Sist endret</div>
+                            <div class="date-value">01.12.2025</div>
+                        </div>
+                        <div class="doc-action">
+                            <button class="download-btn"><i class="fa-solid fa-download"></i> Last ned</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll til toppen" title="Scroll til toppen">
+        <i class="fa-solid fa-arrow-up"></i> To the top
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const scrollArea = document.getElementById('mainContentArea');
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            const topbarHeight = 56;
+
+            if (scrollArea && scrollToTopBtn) {
+                scrollArea.addEventListener('scroll', () => {
+                    if (scrollArea.scrollTop > topbarHeight) {
+                        scrollToTopBtn.classList.add('show');
+                    } else {
+                        scrollToTopBtn.classList.remove('show');
+                    }
+                });
+
+                scrollToTopBtn.addEventListener('click', () => {
+                    scrollArea.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

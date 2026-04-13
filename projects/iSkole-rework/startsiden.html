@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Startsiden - Akademiet</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SortableJS for drag-and-drop -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+    <link href="stylestartsiden.css" rel="stylesheet" />
+    <script type="module" src="script2.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Meny</h2>
+                <div class="sidebar-actions">
+                    <i class="fa-solid fa-thumbtack" title="Fest meny"></i>
+                    <i class="fa-solid fa-lock-open" title="Lås opp"></i>
+                    <i class="fa-solid fa-times" title="Lukk"></i>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active"><a href="startsiden.html"><i class="fa-solid fa-border-all"></i> Startsiden</a></li>
+                <li><a href="timeplan.html"><i class="fa-regular fa-calendar-days"></i> Timeplan</a></li>
+                <li><a href="fravær.html"><i class="fa-solid fa-user-xmark"></i> Fravær</a></li>
+                <li class="has-dropdown">
+                    <a href="#"><i class="fa-solid fa-gauge-high"></i> Vurderinger<i
+                            class="fa-solid fa-chevron-right dropdown-arrow"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="prøver.html">Prøver</a></li>
+                        <li><a href="enkeltvurderinger.html">Enkeltvurderinger</a></li>
+                        <li><a href="egenvurderinger.html">Egenvurderinger</a></li>
+                        <li><a href="karakterer.html">Karakterer</a></li>
+                        <li><a href="ordenOgOppførsel.html">Orden/Oppførsel</a></li>
+                        <li><a href="eksamen.html">Eksamen</a></li>
+                    </ul>
+                </li>
+                <li><a href="meldinger.html"><i class="fa-regular fa-comments"></i> Meldinger</a></li>
+                <li><a href="oppslagstavle.html"><i class="fa-solid fa-thumbtack"></i> Oppslagstavle</a></li>
+                <li class="has-dropdown">
+                    <a href="#"><i class="fa-regular fa-folder-open"></i> Dokumenter<i
+                            class="fa-solid fa-chevron-right dropdown-arrow"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="mineDokumenter.html">Mine dokumenter</a></li>
+                        <li><a href="deltMedMeg.html">Delt med meg</a></li>
+                        <li><a href="elevMappe.html">Elevmappe</a></li>
+                    </ul>
+                </li>
+                <li><a href="personalia.html"><i class="fa-regular fa-user"></i> Personalia</a></li>
+                <li><a href="samtykke.html"><i class="fa-solid fa-handshake"></i> Samtykke</a></li>
+                <li><a href="skolerute.html"><i class="fa-regular fa-calendar-check"></i> Skolerute</a></li>
+                <li><a href="arsUkeplan.html"><i class="fa-solid fa-list-ul"></i> Års-/ukeplan</a></li>
+                <li><a href="elevsamtaler.html"><i class="fa-regular fa-message"></i> Elevsamtaler</a></li>
+                <li><a href="fagsamtaler.html"><i class="fa-regular fa-comments"></i> Fagsamtaler</a></li>
+                <li><a href="soknader.html"><i class="fa-regular fa-file-lines"></i> Søknader</a></li>
+                <li><a href="info.html"><i class="fa-solid fa-circle-info"></i> Info</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <div class="logo">
+                        <span class="logo-icon"><img src="akademiet.png" alt="Akademiet Drammen"
+                                style="width:100px; height:40px;"></span>
+                    </div>
+                </div>
+
+                <div class="topbar-center">
+                    <h1>Akademiet Drammen - Startsiden</h1>
+                </div>
+
+                <div class="topbar-right">
+                    <button id="addCardBtn" class="btn-dark" style="margin-right: 16px;"><i
+                            class="fa-solid fa-plus"></i> Legg til kort</button>
+                    <div class="user-profile">
+                        <i class="fa-solid fa-circle-user profile-icon"></i>
+                        <span class="user-name">Joachim Ramberg Langholen</span>
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+
+                        <div class="profile-dropdown">
+                            <a href="innstillinger.html"><i class="fa-solid fa-cog"></i> Innstillinger</a>
+                            <a href="index.html">
+                                <img src="login-xxl-light.png" alt="Logg ut" class="logout-icon theme-icon-dark">
+                                <img src="login-xxl-dark.png" alt="Logg ut" class="logout-icon theme-icon-light">
+                                Logg ut
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard / Calendar Area (Skipped per user request, placeholder shown) -->
+            <main class="content-area">
+                <div class="dashboard-grid">
+
+                    <!-- Left Column: Timeplan Widget -->
+                    <section class="dashboard-card timeplan-widget" data-widget-id="timeplan-default">
+                        <header class="card-header sortable-handle">
+                            <h2>Timeplan</h2>
+                            <button class="btn-dark">Registrer egenmelding</button>
+                        </header>
+                        <div class="card-body timeplan-body">
+                            <!-- Weekdays Header -->
+                            <div class="days-header">
+                                <div class="day"><span>Ma</span><span class="date">23</span></div>
+                                <div class="day"><span>Ti</span><span class="date">24</span></div>
+                                <div class="day"><span>On</span><span class="date">25</span></div>
+                                <div class="day"><span>To</span><span class="date">26</span></div>
+                                <div class="day active"><span>Fr</span><span class="date date-circle">27</span></div>
+                            </div>
+
+                            <!-- Timeline Area -->
+                            <div class="timeline-container">
+                                <!-- Current Time Indicator (Static for layout purposes) -->
+                                <div class="current-time-line" style="top: 230px;">
+                                    <span class="current-time-label">10:20</span>
+                                </div>
+
+                                <div class="timeline-row whole-day">
+                                    <div class="time-label">hele<br>dagen</div>
+                                    <div class="time-content border-bottom-double"></div>
+                                </div>
+                                <div class="timeline-row">
+                                    <div class="time-label">08:00</div>
+                                    <div class="time-content">
+                                        <div class="class-block green-theme" style="top: 15px; height: 45px;">
+                                            <div class="class-title">IMI: YFF 1 @ 105</div>
+                                            <div class="class-teacher">David Fernández-García, Gabrielle Burud Hanssen
+                                            </div>
+                                            <div class="class-time">08:15 - 09:00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-row">
+                                    <div class="time-label">09:00</div>
+                                    <div class="time-content">
+                                        <div class="class-block green-theme" style="top: 0px; height: 45px;">
+                                            <div class="class-title">IMI: YFF 1 @ 105</div>
+                                            <div class="class-teacher">David Fernández-García, Gabrielle Burud Hanssen
+                                            </div>
+                                            <div class="class-time">09:00 - 09:45</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-row">
+                                    <div class="time-label">10:00</div>
+                                    <div class="time-content">
+                                        <div class="class-block green-theme" style="top: 0px; height: 45px;">
+                                            <div class="class-title">IMI: YFF 1 @ 105</div>
+                                            <div class="class-teacher">Gabrielle Burud Hanssen</div>
+                                            <div class="class-time">10:00 - 10:45</div>
+                                        </div>
+                                        <div class="class-block green-theme" style="top: 45px; height: 45px;">
+                                            <div class="class-title">IMI: YFF 1 @ 105</div>
+                                            <div class="class-teacher">Gabrielle Burud Hanssen</div>
+                                            <div class="class-time">10:45 - 11:30</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-row">
+                                    <div class="time-label">11:00</div>
+                                    <div class="time-content">
+                                    </div>
+                                </div>
+                                <div class="timeline-row">
+                                    <div class="time-label">12:00</div>
+                                    <div class="time-content">
+                                        <div class="class-block green-theme" style="top: 0px; height: 45px;">
+                                            <div class="class-title">IMI: YFG 1</div>
+                                            <div class="class-teacher">David Fernández-García</div>
+                                            <div class="class-time">12:00 - 12:45</div>
+                                        </div>
+                                        <div class="class-block green-theme" style="top: 45px; height: 45px;">
+                                            <div class="class-title">IMI: YFG 1</div>
+                                            <div class="class-teacher">David Fernández-García</div>
+                                            <div class="class-time">12:45 - 13:30</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-row">
+                                    <div class="time-label">13:00</div>
+                                    <div class="time-content">
+                                    </div>
+                                </div>
+                                <div class="timeline-row" style="border-bottom:none;">
+                                    <div class="time-label">14:00</div>
+                                    <div class="time-content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Right Column: Min oversikt Widget -->
+                    <section class="dashboard-card oversikt-widget" data-widget-id="oversikt-default">
+                        <header class="card-header sortable-handle">
+                            <h2>Min oversikt</h2>
+                            <button class="btn-icon"><i class="fa-solid fa-pencil"></i></button>
+                        </header>
+                        <div class="card-body">
+                            <div class="oversikt-grid">
+                                <div class="oversikt-item">
+                                    <div class="item-title">Nye meldinger</div>
+                                    <div class="item-content">
+                                        <i class="fa-solid fa-envelope icon-orange"></i>
+                                        <span class="item-count">0</span>
+                                    </div>
+                                </div>
+                                <div class="oversikt-item">
+                                    <div class="item-title">Samtykke</div>
+                                    <div class="item-content">
+                                        <i class="fa-solid fa-envelope icon-orange"></i>
+                                        <span class="item-count">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

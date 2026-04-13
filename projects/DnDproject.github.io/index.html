@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Monster Search</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="monsterContainer" id="monsterContainer">
+        <h1 id="monsterTitle">Monster Search</h1>
+        <div class="searchContainer">
+          <input
+            type="text"
+            id="monsterInput"
+            placeholder="Enter a monster name"
+            autocomplete="off"
+          />
+          <div id="suggestions" class="suggestionsList"></div>
+        </div>
+        <button id="searchButton">Search</button>
+        <div id="monsterResult" class="monsterResult"></div>
+      </div>
+      <div id="currencyContainer" class="currency-container">
+        <h1 id="currencyTitle">Currency Converter</h1>
+        <div class="searchContainer">
+          <input
+            type="text"
+            id="currencyInput"
+            placeholder="Enter a currency"
+            autocomplete="off"
+          />
+          <div id="currencySuggestions" class="currencySuggestionsList"></div>
+        </div>
+        <button id="currencySearchButton">Convert</button>
+        <div id="currencyResult" class="currencyResult"></div>
+      </div>
+      <div id="shanaContainer" class="shanaContainer">
+        <h1 id="shanaTitle">Inspiration</h1>
+        <div class="shanaInspPicsContainer" id="shanaInspPicsContainer"></div>
+        <div class="shanaQuoteContainer">
+          <p id="shanaQuote"></p>
+          <p id="shanaAuthor"></p>
+        </div>
+        <button id="shanaButton">New Inspiration</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

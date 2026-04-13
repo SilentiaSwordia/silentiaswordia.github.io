@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Innlogging Forelder</title>
+    <link href="stylelogin.css" rel="stylesheet" />
+    <meta name="color-scheme" content="dark light" />
+    <script type="module" src="script2.js"></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="logo">
+        <h1 class="text-logo">ISKOLE - FORELDRE</h1>
+      </div>
+      <div class="filler-div">INGENTING</div>
+      <div></div>
+      <div class="login-panel" id="authPanel">
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label for="loginEmail"></label>
+            <input type="email" id="loginEmail" placeholder="E-post" />
+          </div>
+
+          <div class="form-group">
+            <label for="loginPass"></label>
+            <input type="password" id="loginPass" placeholder="Passord" />
+          </div>
+          <p id="loginMsg" class="msg"></p>
+          <button type="button" class="btn-login" id="loginBtn">
+            <img src="login-xxl-dark.png" width="40" height="40" />
+            <p class="btn-text">Logg inn</p>
+          </button>
+          <br />
+          <button type="button" class="btn-login">
+            <p class="btn-text">Logg inn med passnøkkel</p>
+          </button>
+        </form>
+        <div style="display: flex; justify-content: center">
+          <p class="nytt-passord">Glemt passord?</p>
+        </div>
+        <div style="display: flex; justify-content: left">
+          <a href="index.html" class="nytt-passord">Tilbake til forsiden</a>
+        </div>
+      </div>
+    </div>
+    <script src="script2.js"></script>
+  </body>
+</html>
