@@ -242,46 +242,55 @@ fetchCurrency();
 let shanaWouldLove = [];
 
 function fetchRandomInsp() {
-  // Using an alternative stable API that doesn't need a proxy
-  // This helps avoid the 522 (Server Down) errors from AllOrigins
-  const quotesUrl = "https://type.fit/api/quotes";
+  // dummyjson is much more stable and has proper CORS headers for both Local & GitHub
+  const quotesUrl = "https://dummyjson.com/quotes/random";
 
   axios
     .get(quotesUrl)
     .then((response) => {
-      // type.fit returns a large array of quotes
-      // We pick a random one from the list
-      const quotes = response.data;
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      const randomQuote = quotes[randomIndex];
-
-      shanaQuote.textContent = randomQuote.text;
-      // Some authors are null, so we provide a default
-      shanaAuthor.textContent = "- " + (randomQuote.author || "Anonymous");
+      // DummyJSON structure is { quote: "text", author: "name" }
+      shanaQuote.textContent = response.data.quote;
+      shanaAuthor.textContent = "- " + response.data.author;
     })
     .catch((error) => {
-      console.error("Error fetching Quote:", error);
-      shanaQuote.textContent = "You are capable of amazing things!";
-      shanaAuthor.textContent = "- System";
+      console.error("API Error, using fallback:", error);
+
+      // HARDCODED FALLBACKS: If the internet or API dies, your site still works!
+      const fallbacks = [
+        {
+          q: "Believe you can and you're halfway there.",
+          a: "Theodore Roosevelt",
+        },
+        {
+          q: "Your passion is waiting for your courage to catch up.",
+          a: "Isabelle Lafleche",
+        },
+        {
+          q: "The best way to predict the future is to create it.",
+          a: "Abraham Lincoln",
+        },
+      ];
+      const random = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+
+      shanaQuote.textContent = random.q;
+      shanaAuthor.textContent = "- " + random.a;
     });
 
-  // Dog API (Stay with this, it's working fine)
+  // Dog API
   axios
     .get("https://dog.ceo/api/breeds/image/random")
     .then((response) => {
-      let shanaInspPics = document.createElement("img");
-      shanaInspPics.src = response.data.message;
-      shanaInspPics.alt = "A cute dog";
-      shanaInspPics.width = 300;
-      shanaInspPics.height = 200;
-      shanaInspPics.style.objectFit = "cover";
-
       shanaInspPicsContainer.innerHTML = "";
-      shanaInspPicsContainer.appendChild(shanaInspPics);
+      let img = document.createElement("img");
+      img.src = response.data.message;
+      img.alt = "A cute dog";
+      img.width = 300;
+      img.height = 200;
+      img.style.objectFit = "cover";
+      shanaInspPicsContainer.appendChild(img);
     })
-    .catch((error) => console.error("Error fetching dog picture:", error));
+    .catch((err) => console.error("Dog API Error:", err));
 }
-
 // Fetch initial quote on page load
 fetchRandomInsp();
 
