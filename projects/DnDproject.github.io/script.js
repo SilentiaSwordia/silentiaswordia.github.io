@@ -240,30 +240,26 @@ fetchCurrencyNames();
 fetchCurrency();
 
 let shanaWouldLove = [];
-let shanaWouldLovePics = [];
-const quotesUrl = "https://corsproxy.io/?https://zenquotes.io/api/random";
-const dogUrl = "https://place.dog/300/200";
 
 function fetchRandomInsp() {
-  // Use allorigins as a reliable free CORS proxy for github pages
-  const targetUrl = `https://zenquotes.io/api/random?t=${Date.now()}`;
-  const proxiedQuotesUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
+  // Use Quotable API: No proxy needed, supports CORS natively, works on GitHub Pages
+  const quotesUrl = `https://api.quotable.io/random?t=${Date.now()}`;
 
   axios
-    .get(proxiedQuotesUrl)
+    .get(quotesUrl)
     .then((response) => {
-      shanaWouldLove = response.data;
-      console.log(response.data);
-      if (shanaWouldLove && shanaWouldLove.length > 0) {
-        shanaQuote.textContent = shanaWouldLove[0].q;
-        shanaAuthor.textContent = "- " + shanaWouldLove[0].a;
-      }
+      // Quotable returns a single object, not an array
+      const data = response.data;
+      shanaQuote.textContent = data.content;
+      shanaAuthor.textContent = "- " + data.author;
     })
     .catch((error) => {
-      console.error("Error fetching ZenQuotes:", error);
+      console.error("Error fetching Quote:", error);
+      shanaQuote.textContent = "Keep going, you're doing great!";
+      shanaAuthor.textContent = "- System";
     });
 
-  // dog.ceo avoids the restrictive hotlinking CORS policy of place.dog
+  // dog.ceo is perfect for this
   axios
     .get("https://dog.ceo/api/breeds/image/random")
     .then((response) => {
@@ -272,7 +268,7 @@ function fetchRandomInsp() {
       shanaInspPics.alt = "A cute dog";
       shanaInspPics.width = 300;
       shanaInspPics.height = 200;
-      shanaInspPics.style.objectFit = "cover"; // keep aspect ratio nice
+      shanaInspPics.style.objectFit = "cover";
 
       shanaInspPicsContainer.innerHTML = "";
       shanaInspPicsContainer.appendChild(shanaInspPics);
