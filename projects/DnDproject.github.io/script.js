@@ -246,9 +246,8 @@ const dogUrl = "https://place.dog/300/200";
 
 function fetchRandomInsp() {
   // Use allorigins as a reliable free CORS proxy for github pages
-  const proxiedQuotesUrl =
-    "https://api.allorigins.win/raw?url=" +
-    encodeURIComponent(`https://zenquotes.io/api/random?t=${Date.now()}`);
+  const targetUrl = `https://zenquotes.io/api/random?t=${Date.now()}`;
+  const proxiedQuotesUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
 
   axios
     .get(proxiedQuotesUrl)
